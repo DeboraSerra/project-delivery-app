@@ -116,7 +116,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +125,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'Vanessa Luftnagle','vanessa.luft@email.com','$2b$15$V9ectBc9dq3T.ovEl5Qp5eE.1/5KnZL4lCdVCTj5d6mszON/cwEjC','customer'),(3,'administrator','admin@email.com','$2b$15$dWqLSqCrbZt1Fjlde1rqk.iM/BTZnMVPPCzE9hHZmec7RZDNu.hiS','admin'),(4,'seller seller','seller@email.com','$2b$15$01QhB.InznKKyLUwd55U9ety216HzEXjIW6LkpIVbILn3yWeLuh9i','seller');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -137,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-20 16:59:32
+-- Dump completed on 2022-09-20 18:43:07
