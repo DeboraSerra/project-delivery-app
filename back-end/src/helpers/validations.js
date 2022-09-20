@@ -16,7 +16,10 @@ const validateLogin = async (info) => {
 }
 
 const validateEmail = async (email) => {
-  const { value, error } = joi.assert(email, joi.string().email());
+  const schema = joi.object({
+    email: joi.string().email().required(),
+  });
+  const { value, error } = schema.validate(email);
   if (error) throw new CodeError('Invalid email format', 400);
   return value;
 }
