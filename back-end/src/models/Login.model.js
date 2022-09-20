@@ -11,7 +11,7 @@ const LoginModel = {
   },
   getUser: async (email) => {
     const query = `SELECT * FROM users WHERE email = ?`;
-    const [user] = await conn.execute(query, [email]);
+    const [[ user ]] = await conn.execute(query, [email]);
     return user;
   },
 };
