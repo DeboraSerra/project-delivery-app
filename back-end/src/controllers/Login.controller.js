@@ -17,6 +17,20 @@ const LoginController = {
     const token = await createToken(userInfo);
     res.status(200).json({ user: { ...userInfo, token } });
   },
+  resetPassword: async (req, res) => {
+    const { password, email } = req.body;
+    const user = await service.resetPassword(email, password);
+    res.status(200).json({ user })
+  },
+  changePassword: async (req, res) => {
+    const { oldPass, newPass, email } = req.body;
+    const user = await service.changePassword(email, oldPass, newPass);
+    res.status(200).json({ user })
+  },
+  forgotPassword: async (req, res) => {
+    const { email } = req.body;
+    await service.forgotPassword(email);
+  }
 };
 
 module.exports = LoginController;

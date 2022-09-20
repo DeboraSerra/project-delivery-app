@@ -25,6 +25,30 @@ const LoginService = {
     const { password: pass, ...info } = user;
     return info;
   },
+  forgotPassword: async (email) => {},
+  resetPassword: async (email, password) => {
+    if (password.length < 6) {
+      throw new CodeError('Password must have at least 6 characters', 400);
+    }
+    const hash = await bcrypt.hash(password, 15);
+    const info = await model.resetPassword(email, hash);
+    const { password: pass, ...user } = info;
+    return user;
+  },
+  changePassword: async (email, oldPass, newPass) => {
+    const user = await model.getUser(email);
+    const match = await bcrypt.compare(oldPass, user.password);
+    if (!match) {
+      throw new CodeError('Password doesn\'t match', 400);
+    }
+    if (newPass.length < 6) {
+      throw new CodeError('Password must have at least 6 characters', 400);
+    }
+    const hash = await bcrypt.hash(newPass, 15);
+    const info = await model.resetPassword(email, hash);
+    const { password: pass, ...newUser } = info;
+    return newUser;
+  },
 };
 
 module.exports = LoginService;

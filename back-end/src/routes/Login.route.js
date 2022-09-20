@@ -9,4 +9,13 @@ router.route('/')
 router.route('/register')
   .post(LoginController.createUser);
 
+router.route('/reset')
+  .post(LoginController.resetPassword);
+
+router.route('/change')
+  .post(LoginController.changePassword);
+
+router.route('/forgot')
+  .post(LoginController.forgotPassword);
+
 module.exports = router;
