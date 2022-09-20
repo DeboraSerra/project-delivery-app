@@ -1,0 +1,14 @@
+[
+  {
+    "email": "vanessa.luft@email.com",
+    "password": "vanessinha123"
+  },
+  {
+    "email": "admin@email.com",
+    "password": "admin_pass"
+  },
+  {
+    "email": "seller@email.com",
+    "password": "seller_pass"
+  }
+]
