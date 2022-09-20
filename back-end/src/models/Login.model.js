@@ -9,12 +9,9 @@ const LoginModel = {
     const [{ insertId }] = await conn.execute(query, [name, email, password, role]);
     return insertId;
   },
-  getUser: async (id) => {
-    const query = `
-      SELECT name, email, role
-      FROM users WHERE id = ?
-    `;
-    const [user] = await conn.execute(query, [id]);
+  getUser: async (email) => {
+    const query = `SELECT * FROM users WHERE email = ?`;
+    const [user] = await conn.execute(query, [email]);
     return user;
   },
 };
