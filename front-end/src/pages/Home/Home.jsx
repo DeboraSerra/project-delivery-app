@@ -1,5 +1,11 @@
+import { Header, Footer } from 'components';
+
 export function Home() {
   return (
-    <div>Hello Home World!</div>
+    <div>
+      <Header />
+      <p>Hello Home World!</p>
+      <Footer />
+    </div>
   );
 }
