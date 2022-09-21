@@ -14,6 +14,17 @@ const LoginModel = {
     const [[ user ]] = await conn.execute(query, [email]);
     return user;
   },
+  forgotPassword: async (email) => {
+
+  },
+  resetPassword: async (email, password) => {
+    const query = `
+      UPDATE users SET password = ?
+      WHERE email = ?;
+    `;
+    const updated = await conn.execute(query, [password, email]);
+    return updated;
+  },
 };
 
 module.exports = LoginModel;
