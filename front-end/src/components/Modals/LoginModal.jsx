@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {
-  Backdrop, Box, Modal, Fade, Button, Typography,
+  Backdrop, Box, Modal, Fade, Button,
 } from '@mui/material';
+import { LoginForm } from 'components/Forms';
 import { loginModalStyle } from './LoginModal.style';
 
 export function LoginModal() {
@@ -10,7 +11,7 @@ export function LoginModal() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
+    <>
       <Button
         onClick={handleOpen}
         variant="contained"
@@ -33,15 +34,10 @@ export function LoginModal() {
       >
         <Fade in={open}>
           <Box sx={loginModalStyle}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-              Login
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Error: Not Implemented.
-            </Typography>
+            <LoginForm />
           </Box>
         </Fade>
       </Modal>
-    </div>
+    </>
   );
 }
