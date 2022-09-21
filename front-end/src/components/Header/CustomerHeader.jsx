@@ -6,14 +6,16 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme } from '@mui/material/styles';
 import { Logo } from 'components/Images';
 import { NightModeToggle } from 'components/Buttons';
+import { useSelector } from 'react-redux';
 
 const pages = ['Products', 'My Orders'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Logout'];
 
 export function CustomerHeader() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const theme = useTheme();
+  const { userInfo } = useSelector((state) => state);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -122,7 +124,7 @@ export function CustomerHeader() {
         <Box sx={{ flexGrow: 0 }}>
           <Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <Avatar alt={`${userInfo.name}`} src={`${userInfo.name}`} />
             </IconButton>
           </Tooltip>
           <Menu
