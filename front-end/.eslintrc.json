@@ -7,6 +7,13 @@
         "plugin:react/recommended",
         "airbnb"
     ],
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "moduleDirectory": ["node_modules", "src/"]
+          }
+        }
+    },
     "overrides": [
     ],
     "parserOptions": {
@@ -14,13 +21,12 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react", "plugin:import/errors", "plugin:import/warnings"
     ],
     "rules": {
       "import/prefer-default-export": "off",
       "react/react-in-jsx-scope": "off",
       "import/no-extraneous-dependencies": "off",
-      "import/no-unresolved": "off",
       "import/extensions": "off",
       "no-param-reassign": "off",
       "react/jsx-props-no-spreading": "off",

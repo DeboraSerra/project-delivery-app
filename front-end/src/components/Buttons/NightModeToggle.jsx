@@ -1,4 +1,4 @@
-import IconButton from '@mui/material/IconButton';
+import { IconButton } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { setDarkMode } from 'redux/slicers';
 
