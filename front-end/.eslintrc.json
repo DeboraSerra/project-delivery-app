@@ -21,7 +21,7 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react", "plugin:import/errors", "plugin:import/warnings"
+        "react"
     ],
     "rules": {
       "import/prefer-default-export": "off",
@@ -30,6 +30,7 @@
       "import/extensions": "off",
       "no-param-reassign": "off",
       "react/jsx-props-no-spreading": "off",
-      "no-unsafe-optional-chaining": "off"
+      "no-unsafe-optional-chaining": "off",
+      "import/no-cycle": "off"
     }
 }

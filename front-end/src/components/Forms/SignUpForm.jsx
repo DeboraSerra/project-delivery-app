@@ -1,11 +1,19 @@
+import { useState } from 'react';
 import { useFormik } from 'formik';
-import { Box, Button, Grid, TextField, Typography, Link } from '@mui/material';
+import {
+  Box, Button, Grid, TextField, Typography, Link,
+} from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { signUpFormValidation } from 'utils/formValidations';
 import { Container } from 'components/Common';
+import { StatusMessages } from 'components/StatusMessages';
+import { registerNewUser } from 'utils/api';
 
 export function SignUpForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+
   const INITIAL_STATE = {
     name: '',
     email: '',
@@ -13,14 +21,23 @@ export function SignUpForm() {
     confirmPassword: '',
   };
 
-  const onSubmit = () => {
-    navigate('/customer');
+  const onSubmit = async ({ name, email, password }) => {
+    setIsSubmitting(true);
+
+    try {
+      await registerNewUser({ name, email, password });
+      navigate('/customer');
+    } catch (err) {
+      setErrorMsg(err.message);
+    }
+
+    setIsSubmitting(false);
   };
 
   const formik = useFormik({
     initialValues: INITIAL_STATE,
     validationSchema: signUpFormValidation,
-    onSubmit,
+    onSubmit: () => onSubmit(formik.values),
   });
 
   return (
@@ -44,6 +61,7 @@ export function SignUpForm() {
               Create an account
             </Typography>
           </Box>
+          {errorMsg && (<StatusMessages message={errorMsg} type="error" />)}
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
@@ -134,7 +152,7 @@ export function SignUpForm() {
                       </Link>
                     </Typography>
                   </Box>
-                  <Button size="large" variant="contained" type="submit">
+                  <Button size="large" variant="contained" type="submit" disabled={isSubmitting}>
                     Sign up
                   </Button>
                 </Box>
