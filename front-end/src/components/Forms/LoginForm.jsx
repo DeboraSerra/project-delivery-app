@@ -10,11 +10,14 @@ import { Container } from 'components/Common';
 import { loginUser } from 'utils/api';
 import { StatusMessages } from 'components/StatusMessages';
 import { useState } from 'react';
+import { setUserInfo } from 'redux/slicers';
+import { useDispatch } from 'react-redux';
 
 export function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const INITIAL_STATE = {
     email: '',
@@ -25,8 +28,9 @@ export function LoginForm() {
     setIsSubmitting(true);
 
     try {
-      const { role } = await loginUser({ email, password });
-      navigate(`/${role}`);
+      const result = await loginUser({ email, password });
+      dispatch(setUserInfo(result));
+      navigate(`/${result.role}`);
     } catch (err) {
       setErrorMsg(err.message);
     }
