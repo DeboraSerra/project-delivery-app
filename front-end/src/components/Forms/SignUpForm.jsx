@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import {
-  Box, Button, Grid, TextField, Typography, Link,
+  Box, Grid, TextField, Typography, Link,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { signUpFormValidation } from 'utils/formValidations';
 import { Container } from 'components/Common';
@@ -152,9 +154,16 @@ export function SignUpForm() {
                       </Link>
                     </Typography>
                   </Box>
-                  <Button size="large" variant="contained" type="submit" disabled={isSubmitting}>
-                    Sign up
-                  </Button>
+                  <LoadingButton
+                    size="large"
+                    type="submit"
+                    endIcon={<SendIcon />}
+                    loading={isSubmitting}
+                    loadingPosition="end"
+                    variant="contained"
+                  >
+                    Sign Up
+                  </LoadingButton>
                 </Box>
               </Grid>
               <Grid
