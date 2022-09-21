@@ -1,15 +1,14 @@
 import {
-  Box, AppBar, Divider, Link,
+  Box, AppBar, Divider,
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { NightModeToggle } from 'components/Buttons';
-import { Logo } from 'components/Images';
-import { Container } from 'components/Common';
-import { LoginModal } from 'components/Modals';
+import { useSelector } from 'react-redux';
+import { CustomerHeader } from './CustomerHeader';
+import { VisitorHeader } from './VisitorHeader';
 
 export function Header() {
   const theme = useTheme();
+  const { userInfo } = useSelector((state) => state);
   return (
     <Box height="100%" overflow="hidden" width="100%">
       <AppBar
@@ -19,28 +18,7 @@ export function Header() {
         }}
         elevation={0}
       >
-        <Container paddingY={{ xs: 1 / 2, sm: 1 }} maxWidth={{ md: '1100px' }}>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            width="100%"
-          >
-            <Link
-              component={RouterLink}
-              to="/"
-              underline="none"
-            >
-              <Logo />
-            </Link>
-            <Box display="flex" alignItems="center">
-              <Box marginRight="1rem">
-                <NightModeToggle />
-              </Box>
-              <LoginModal />
-            </Box>
-          </Box>
-        </Container>
+        {userInfo.token ? <CustomerHeader /> : <VisitorHeader />}
         <Divider />
       </AppBar>
     </Box>
