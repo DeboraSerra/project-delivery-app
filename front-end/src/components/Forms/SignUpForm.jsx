@@ -142,15 +142,15 @@ export function SignUpForm() {
                 >
                   <Box marginBottom={{ xs: 1, sm: 0 }}>
                     <Typography variant="subtitle2">
-                      Already have an account?
+                      By clicking Sign up button you agree with our
                       {' '}
                       <Link
                         component={RouterLink}
                         color="primary"
-                        to="/login"
+                        to="/privacy-policy"
                         underline="none"
                       >
-                        Login.
+                        Privacy policy.
                       </Link>
                     </Typography>
                   </Box>
@@ -172,24 +172,7 @@ export function SignUpForm() {
                 xs={12}
                 justifyContent="center"
                 alignItems="center"
-              >
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  align="center"
-                >
-                  By clicking Sign up button you agree with our
-                  {' '}
-                  <Link
-                    component={RouterLink}
-                    color="primary"
-                    to="/privacy-policy"
-                    underline="none"
-                  >
-                    Privacy policy.
-                  </Link>
-                </Typography>
-              </Grid>
+              />
             </Grid>
           </form>
         </Box>
