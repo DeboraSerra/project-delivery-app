@@ -1,24 +1,43 @@
 import { useFormik } from 'formik';
-import { Box, Grid, TextField, Button, Typography, Link } from '@mui/material';
+import {
+  Box, Grid, TextField, Typography, Link,
+} from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { loginFormValidation } from 'utils/formValidations';
 import { Container } from 'components/Common';
+import { loginUser } from 'utils/api';
+import { StatusMessages } from 'components/StatusMessages';
+import { useState } from 'react';
 
 export function LoginForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+
   const INITIAL_STATE = {
     email: '',
     password: '',
   };
 
-  const onSubmit = () => {
-    navigate('/customer');
+  const onSubmit = async ({ email, password }) => {
+    setIsSubmitting(true);
+
+    try {
+      await loginUser({ email, password });
+      navigate('/customer');
+    } catch (err) {
+      setErrorMsg(err.message);
+    }
+
+    setIsSubmitting(false);
   };
 
   const formik = useFormik({
     initialValues: INITIAL_STATE,
     validationSchema: loginFormValidation,
-    onSubmit,
+    onSubmit: () => onSubmit(formik.values),
   });
 
   return (
@@ -31,6 +50,7 @@ export function LoginForm() {
     >
       <Container maxWidth={600}>
         <Box>
+          {errorMsg && (<StatusMessages message={errorMsg} type="error" />)}
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
@@ -86,9 +106,16 @@ export function LoginForm() {
                       </Link>
                     </Typography>
                   </Box>
-                  <Button size="large" variant="contained" type="submit">
+                  <LoadingButton
+                    size="large"
+                    type="submit"
+                    endIcon={<SendIcon />}
+                    loading={isSubmitting}
+                    loadingPosition="end"
+                    variant="contained"
+                  >
                     Login
-                  </Button>
+                  </LoadingButton>
                 </Box>
               </Grid>
             </Grid>

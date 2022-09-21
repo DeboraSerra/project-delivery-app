@@ -4,7 +4,7 @@ export const signUpFormValidation = yup.object({
   name: yup
     .string('Enter your name')
     .trim()
-    .min(2, 'Please enter a valid name')
+    .min(6, 'Please enter a valid name')
     .max(50, 'Please enter a valid name')
     .required('Please specify your name'),
   email: yup
