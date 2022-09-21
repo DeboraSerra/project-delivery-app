@@ -1,4 +1,6 @@
-import { Box, AppBar, Divider, Link } from '@mui/material';
+import {
+  Box, AppBar, Divider, Link,
+} from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { NightModeToggle } from 'components/Buttons';
