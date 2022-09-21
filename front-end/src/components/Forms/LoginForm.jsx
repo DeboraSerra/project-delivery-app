@@ -25,8 +25,8 @@ export function LoginForm() {
     setIsSubmitting(true);
 
     try {
-      await loginUser({ email, password });
-      navigate('/customer');
+      const { role } = await loginUser({ email, password });
+      navigate(`/${role}`);
     } catch (err) {
       setErrorMsg(err.message);
     }
