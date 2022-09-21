@@ -3,11 +3,11 @@ const service = require('../services/Login.service');
 
 const LoginController = {
   createUser: async (req, res) => {
-    await service.createUser(req.body);
+    const user = await service.createUser(req.body);
     const { password, ...info } = req.body;
     const token = await createToken(info);
     res.status(200).json({ user: {
-      ...info,
+      ...user,
       token,
     }})
   },

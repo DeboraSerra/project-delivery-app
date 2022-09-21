@@ -10,7 +10,8 @@ const LoginService = {
     if (exists) throw new CodeError('User already exists', 400);
     const hash = await bcrypt.hash(value.password, 15);
     const id = await model.createUser({ ...value, password: hash });
-    return { ...value, id };
+    const { password, ...user } = value;
+    return { ...user, id };
   },
   getUser: async (email, password) => {
     await validateEmail({ email });
