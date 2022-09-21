@@ -5,6 +5,7 @@ export function NotFound() {
   return (
     <div>
       <Header />
+       <br />
         Page not found.
       <Footer />
     </div>

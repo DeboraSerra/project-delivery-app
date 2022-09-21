@@ -7,8 +7,6 @@ import { Container } from 'components/Common';
 export function LoginForm() {
   const navigate = useNavigate();
   const INITIAL_STATE = {
-    name: '',
-    username: '',
     email: '',
     password: '',
   };
