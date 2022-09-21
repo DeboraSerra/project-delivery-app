@@ -10,11 +10,14 @@ import { signUpFormValidation } from 'utils/formValidations';
 import { Container } from 'components/Common';
 import { StatusMessages } from 'components/StatusMessages';
 import { registerNewUser } from 'utils/api';
+import { setUserInfo } from 'redux/slicers';
+import { useDispatch } from 'react-redux';
 
 export function SignUpForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const INITIAL_STATE = {
     name: '',
@@ -27,7 +30,8 @@ export function SignUpForm() {
     setIsSubmitting(true);
 
     try {
-      await registerNewUser({ name, email, password });
+      const result = await registerNewUser({ name, email, password });
+      dispatch(setUserInfo(result));
       navigate('/customer');
     } catch (err) {
       setErrorMsg(err.message);
