@@ -1,15 +1,13 @@
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
-import CssBaseline from '@mui/material/CssBaseline';
-import Paper from '@mui/material/Paper';
-import AOS from 'aos';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, Paper } from '@mui/material';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { isDarkModeActive } from 'utils/checkDarkMode';
-import { setDarkMode } from 'redux/slicers/darkMode.slice';
+import { setDarkMode } from 'redux/slicers';
 import { Router } from 'routes';
-import { checkCurrentTheme } from 'utils/checkCurrentTheme';
-import { getTheme } from 'themes/getTheme';
-import { Container } from 'components/Common/Container';
+import { checkCurrentTheme, isDarkModeActive } from 'utils';
+import { getTheme } from 'themes';
+import { Container } from 'components/Common';
+import AOS from 'aos';
 
 export function App() {
   const { darkMode } = useSelector((state) => state);
