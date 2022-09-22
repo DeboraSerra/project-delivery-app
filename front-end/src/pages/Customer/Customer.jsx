@@ -10,9 +10,14 @@ import { Box } from '@mui/material';
 export function Customer() {
   const { userInfo } = useSelector((state) => state);
   const [products, setProducts] = useState([]);
+  const { cartItems } = useSelector((state) => state);
   useEffect(() => {
     getAllProducts(userInfo.token).then((data) => setProducts(data.products));
   }, []);
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
 
   return (
     <>
