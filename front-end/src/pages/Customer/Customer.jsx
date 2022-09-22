@@ -7,6 +7,7 @@ import { Container } from 'components/Common';
 import { ProductCard } from 'components/Cards';
 import { Box } from '@mui/material';
 import { setProducts } from 'redux/slicers';
+import { ShoppingCartFloating } from 'components/Buttons';
 
 export function Customer() {
   const { userInfo, products } = useSelector((state) => state);
@@ -38,6 +39,7 @@ export function Customer() {
             />
           ))}
         </Box>
+        <ShoppingCartFloating />
       </Container>
       <Footer />
     </>
