@@ -10,7 +10,7 @@ const createToken = async (data) => {
 }
 
 const validateToken = async (token) => {
-  const { data } = jwt.verify(token, secret);
+  const data = jwt.verify(token, secret);
   const user = await userModel.getUser(data.email);
   if (!user) throw new CodeError('Invalid token', 403);
   const { password, ...info } = user;
