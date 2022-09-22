@@ -24,7 +24,19 @@ const validateEmail = async (email) => {
   return value;
 }
 
+const validateProduct = async (product) => {
+  const schema = joi.object({
+    name: joi.string().min(3).required(),
+    price: joi.number().greater(0.5).required(),
+    image: joi.string().required(),
+  });
+  const { value, error } = schema.validate(product);
+  if (error) throw new CodeError(error.message, 400);
+  return value;
+}
+
 module.exports = {
   validateLogin,
   validateEmail,
+  validateProduct,
 }
