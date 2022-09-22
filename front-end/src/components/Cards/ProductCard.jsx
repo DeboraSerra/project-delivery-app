@@ -18,6 +18,17 @@ export function ProductCard({
   const findItem = cartItems.find((e) => e.productId === productId);
   const [quantity, setQuantity] = useState(findItem?.qty || 0);
 
+  const handleQuantity = (e) => {
+    const value = +e.target.value;
+    setQuantity(value);
+    if (value > 0) {
+      return dispatch(setCartItems({
+        productId, productName, productPrice, productUrlImage, qty: value,
+      }));
+    }
+    return dispatch(removeItemFromCart(productId));
+  };
+
   const handleAdd = () => {
     setQuantity(quantity + 1);
     dispatch(setCartItems({
@@ -72,6 +83,7 @@ export function ProductCard({
           <Input
             sx={{ width: 50, input: { textAlign: 'center' }, backgroundColor: theme.palette.background.cart }}
             value={quantity}
+            onChange={handleQuantity}
           />
           <Button
             onClick={handleAdd}
