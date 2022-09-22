@@ -14,7 +14,7 @@ export function CustomerHeader() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const theme = useTheme();
-  const { userInfo } = useSelector((state) => state);
+  const { userInfo, products } = useSelector((state) => state);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -66,7 +66,7 @@ export function CustomerHeader() {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            {pages.map(({ name, link }) => (
+            {pages.map(({ name, link }, i) => (
               <MenuItem key={`mobile-${name}`} onClick={handleCloseNavMenu}>
                 <Typography
                   textAlign="center"
@@ -75,6 +75,8 @@ export function CustomerHeader() {
                   to={link}
                 >
                   {name}
+                  {' '}
+                  {i === 0 && `(${products.length})`}
                 </Typography>
               </MenuItem>
             ))}
@@ -84,7 +86,7 @@ export function CustomerHeader() {
         <Logo isMobile />
 
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map(({ name, link }) => (
+          {pages.map(({ name, link }, i) => (
             <Button
               key={name}
               component={RouterLink}
@@ -101,6 +103,8 @@ export function CustomerHeader() {
               }}
             >
               {name}
+              {' '}
+              {i === 0 && `(${products.length})`}
             </Button>
           ))}
         </Box>

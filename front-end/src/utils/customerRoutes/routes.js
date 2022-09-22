@@ -1,6 +1,6 @@
 export const pages = [
   {
-    name: 'Product',
+    name: 'Products',
     link: '/customer',
   },
   {
