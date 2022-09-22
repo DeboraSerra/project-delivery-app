@@ -4,3 +4,4 @@ export { userInfoSlice } from './userInfo.slice';
 export { setUserInfo } from './userInfo.slice';
 export { cartItemsSlice } from './cartItems.slice';
 export { setCartItems } from './cartItems.slice';
+export { removeItemFromCart } from './cartItems.slice';

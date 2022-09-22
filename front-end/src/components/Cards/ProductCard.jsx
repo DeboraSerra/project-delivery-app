@@ -7,7 +7,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCartItems } from 'redux/slicers';
+import { setCartItems, removeItemFromCart } from 'redux/slicers';
 
 export function ProductCard({
   productId, productName, productPrice, productUrlImage, cardHeight, cardWidth,
@@ -31,6 +31,9 @@ export function ProductCard({
       dispatch(setCartItems({
         productId, productName, productPrice, productUrlImage, qty: quantity - 1,
       }));
+    }
+    if (quantity === 1) {
+      dispatch(removeItemFromCart(productId));
     }
   };
 
