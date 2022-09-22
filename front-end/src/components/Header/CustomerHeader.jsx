@@ -7,9 +7,33 @@ import { useTheme } from '@mui/material/styles';
 import { Logo } from 'components/Images';
 import { NightModeToggle } from 'components/Buttons';
 import { useSelector } from 'react-redux';
+import { Link as RouterLink } from 'react-router-dom';
 
-const pages = ['Products', 'My Orders'];
-const settings = ['Profile', 'Account', 'Logout'];
+const pages = [
+  {
+    name: 'Product',
+    link: '/customer',
+  },
+  {
+    name: 'My Orders',
+    link: '/customer/orders',
+  },
+];
+
+const settings = [
+  {
+    name: 'Profile',
+    link: '/customer/profile',
+  },
+  {
+    name: 'Account Settings',
+    link: '/customer/settings',
+  },
+  {
+    name: 'Logout',
+    link: '/customer/logout',
+  },
+];
 
 export function CustomerHeader() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -59,6 +83,7 @@ export function CustomerHeader() {
             aria-haspopup="true"
             onClick={handleOpenNavMenu}
             color="inherit"
+            sx={{ color: theme.palette.text.primary }}
           >
             <MenuIcon />
           </IconButton>
@@ -80,9 +105,16 @@ export function CustomerHeader() {
               display: { xs: 'block', md: 'none' },
             }}
           >
-            {pages.map((page) => (
-              <MenuItem key={page} onClick={handleCloseNavMenu}>
-                <Typography textAlign="center" sx={{ color: theme.palette.text.primary }}>{page}</Typography>
+            {pages.map(({ name, link }) => (
+              <MenuItem key={`mobile-${name}`} onClick={handleCloseNavMenu}>
+                <Typography
+                  textAlign="center"
+                  sx={{ color: theme.palette.text.primary }}
+                  component={RouterLink}
+                  to={link}
+                >
+                  {name}
+                </Typography>
               </MenuItem>
             ))}
           </Menu>
@@ -104,15 +136,23 @@ export function CustomerHeader() {
           <Logo />
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          {pages.map((page) => (
+          {pages.map(({ name, link }) => (
             <Button
-              key={page}
+              key={name}
+              component={RouterLink}
+              to={link}
               onClick={handleCloseNavMenu}
               sx={{
-                my: 2, textTransform: 'uppercase', fontWeight: 'bold', m: 1, color: theme.palette.text.primary, display: 'block',
+                my: 2,
+                textTransform: 'uppercase',
+                fontWeight: 'bold',
+                m: 1,
+                color: theme.palette.text.primary,
+                display: 'block',
+                textDecoration: 'none',
               }}
             >
-              {page}
+              {name}
             </Button>
           ))}
         </Box>
@@ -143,9 +183,16 @@ export function CustomerHeader() {
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
           >
-            {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
+            {settings.map(({ name, link }) => (
+              <MenuItem key={name} onClick={handleCloseUserMenu}>
+                <Typography
+                  textAlign="center"
+                  component={RouterLink}
+                  to={link}
+                  sx={{ color: theme.palette.text.primary, textDecoration: 'none' }}
+                >
+                  {name}
+                </Typography>
               </MenuItem>
             ))}
           </Menu>
