@@ -8,32 +8,7 @@ import { Logo } from 'components/Images';
 import { NightModeToggle } from 'components/Buttons';
 import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-
-const pages = [
-  {
-    name: 'Product',
-    link: '/customer',
-  },
-  {
-    name: 'My Orders',
-    link: '/customer/orders',
-  },
-];
-
-const settings = [
-  {
-    name: 'Profile',
-    link: '/customer/profile',
-  },
-  {
-    name: 'Account Settings',
-    link: '/customer/settings',
-  },
-  {
-    name: 'Logout',
-    link: '/customer/logout',
-  },
-];
+import { pages, settings } from 'utils/customerRoutes';
 
 export function CustomerHeader() {
   const [anchorElNav, setAnchorElNav] = useState(null);
