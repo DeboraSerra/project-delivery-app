@@ -13,7 +13,8 @@ export function VisitorHeader() {
         alignItems="center"
         width="100%"
       >
-        <Logo />
+        <Logo isMobile={false} />
+        <Logo isMobile />
         <Box display="flex" alignItems="center">
           <Box marginRight="1rem">
             <NightModeToggle />

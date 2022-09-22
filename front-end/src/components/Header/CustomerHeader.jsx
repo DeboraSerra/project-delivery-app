@@ -34,21 +34,7 @@ export function CustomerHeader() {
   return (
     <Container maxWidth="xl">
       <Toolbar disableGutters>
-        <Typography
-          variant="h6"
-          noWrap
-          sx={{
-            mr: 2,
-            display: { xs: 'none', md: 'flex' },
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: theme.palette.text.primary,
-            textDecoration: 'none',
-          }}
-        >
-          <Logo />
-        </Typography>
+        <Logo isMobile={false} />
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
@@ -94,22 +80,9 @@ export function CustomerHeader() {
             ))}
           </Menu>
         </Box>
-        <Typography
-          variant="h5"
-          noWrap
-          sx={{
-            mr: 2,
-            display: { xs: 'flex', md: 'none' },
-            flexGrow: 1,
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: theme.palette.text.primary,
-            textDecoration: 'none',
-          }}
-        >
-          <Logo />
-        </Typography>
+
+        <Logo isMobile />
+
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {pages.map(({ name, link }) => (
             <Button
