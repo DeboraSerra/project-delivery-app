@@ -2,7 +2,10 @@ const conn = require('./connection');
 
 const ProductsModel = {
   getAll: async () => {
-    const query = `SELECT * FROM products;`;
+    const query = `
+      SELECT id, name, price, url_image AS urlImage
+      FROM products;
+    `;
     const [products] = await conn.execute(query);
     return products;
   },
