@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCartItems } from 'redux/slicers';
 
 export function ProductCard({
@@ -14,7 +14,9 @@ export function ProductCard({
 }) {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(0);
+  const { cartItems } = useSelector((state) => state);
+  const findItem = cartItems.find((e) => e.productId === productId);
+  const [quantity, setQuantity] = useState(findItem?.qty || 0);
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
