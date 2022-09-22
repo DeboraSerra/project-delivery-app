@@ -35,8 +35,51 @@ const validateProduct = async (product) => {
   return value;
 }
 
+const validateSale = async (info) => {
+  const prodSchema = joi.object({
+    id: joi.number().positive().required(),
+    qty: joi.number().positive().required(),
+  });
+  const schema = joi.object({
+    user: joi.number().positive().required(),
+    seller: joi.number().positive().required(),
+    total: joi.number().min(0.5).required(),
+    address: joi.string().required(),
+    number: joi.number().positive().required(),
+    date: joi.date().required(),
+    status: joi.string().required(),
+    products: joi.array().items(prodSchema).required(),
+  });
+  const { value, error } = schema.validate(info);
+  if (error) throw new CodeError(error.message, 400);
+  return value;
+}
+
+const validateStatus = async (info) => {
+  const schema = joi.object({
+    id: joi.number().positive().required(),
+    status: joi.string().valid('Pending', 'Preparing', 'On the way', 'Delivered').required(),
+  });
+  const { value, error } = schema.validate(info);
+  if (error) throw new CodeError(error.message, 400);
+  return value;
+}
+
+const validateGetById = async (info) => {
+  const schema = joi.object({
+    id: joi.number().positive().required(),
+    role: joi.string().valid('customer', 'seller').required(),
+  });
+  const { value, error } = schema.validate(info);
+  if (error) throw new CodeError(error.message, 400);
+  return value;
+}
+
 module.exports = {
   validateLogin,
   validateEmail,
   validateProduct,
+  validateSale,
+  validateStatus,
+  validateGetById,
 }
