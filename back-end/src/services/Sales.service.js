@@ -31,9 +31,13 @@ const SaleService = {
     const sales = await model.getAllById(value);
     return sales;
   },
-  getOne: async (id) => {
+  getOne: async (id, user) => {
     const sale = await model.getOne(id);
     if (!sale) throw new CodeError('Sale not found', 404);
+    if ((user.role === 'customer' && user.id !== sale.user)
+      || (user.role === 'seller' && user.id !== sale.seller)) {
+      throw new CodeError('Unauthorized access', 403);
+    }
     return sale;
   },
   delete: async (id) => {

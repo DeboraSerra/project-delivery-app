@@ -12,14 +12,14 @@ const SalesController = {
     res.status(200).json({ sale });
   },
   getAllById: async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.user;
     const { role } = req.query;
     const sales = await service.getAllById({ id, role });
     res.status(200).json({ sales });
   },
   getOne: async (req, res) => {
     const { id } = req.params;
-    const sale = await service.getOne(id);
+    const sale = await service.getOne(id, req.user);
     res.status(200).json({ sale });
   },
   delete: async (req, res) => {
