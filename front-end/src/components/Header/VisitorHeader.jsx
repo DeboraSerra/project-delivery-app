@@ -1,5 +1,4 @@
-import { Box, Link } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Box } from '@mui/material';
 import { NightModeToggle } from 'components/Buttons';
 import { Logo } from 'components/Images';
 import { Container } from 'components/Common';
@@ -14,13 +13,8 @@ export function VisitorHeader() {
         alignItems="center"
         width="100%"
       >
-        <Link
-          component={RouterLink}
-          to="/"
-          underline="none"
-        >
-          <Logo />
-        </Link>
+        <Logo isMobile={false} />
+        <Logo isMobile />
         <Box display="flex" alignItems="center">
           <Box marginRight="1rem">
             <NightModeToggle />

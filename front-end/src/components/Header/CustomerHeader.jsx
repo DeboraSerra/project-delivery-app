@@ -8,32 +8,7 @@ import { Logo } from 'components/Images';
 import { NightModeToggle } from 'components/Buttons';
 import { useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
-
-const pages = [
-  {
-    name: 'Product',
-    link: '/customer',
-  },
-  {
-    name: 'My Orders',
-    link: '/customer/orders',
-  },
-];
-
-const settings = [
-  {
-    name: 'Profile',
-    link: '/customer/profile',
-  },
-  {
-    name: 'Account Settings',
-    link: '/customer/settings',
-  },
-  {
-    name: 'Logout',
-    link: '/customer/logout',
-  },
-];
+import { pages, settings } from 'utils/customerRoutes';
 
 export function CustomerHeader() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -59,21 +34,7 @@ export function CustomerHeader() {
   return (
     <Container maxWidth="xl">
       <Toolbar disableGutters>
-        <Typography
-          variant="h6"
-          noWrap
-          sx={{
-            mr: 2,
-            display: { xs: 'none', md: 'flex' },
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: theme.palette.text.primary,
-            textDecoration: 'none',
-          }}
-        >
-          <Logo />
-        </Typography>
+        <Logo isMobile={false} />
 
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
           <IconButton
@@ -119,22 +80,9 @@ export function CustomerHeader() {
             ))}
           </Menu>
         </Box>
-        <Typography
-          variant="h5"
-          noWrap
-          sx={{
-            mr: 2,
-            display: { xs: 'flex', md: 'none' },
-            flexGrow: 1,
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: theme.palette.text.primary,
-            textDecoration: 'none',
-          }}
-        >
-          <Logo />
-        </Typography>
+
+        <Logo isMobile />
+
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           {pages.map(({ name, link }) => (
             <Button
