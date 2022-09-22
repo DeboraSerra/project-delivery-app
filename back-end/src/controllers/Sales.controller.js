@@ -2,7 +2,8 @@ const service = require('../services/Sales.service');
 
 const SalesController = {
   createSale: async (req, res) => {
-    const sale = await service.createSale(req.body);
+    const { id } = req.user;
+    const sale = await service.createSale({ user: id, ...req.body });
     res.status(200).json({ sale });
   },
   updateStatus: async (req, res) => {
@@ -14,6 +15,7 @@ const SalesController = {
   getAllById: async (req, res) => {
     const { id } = req.user;
     const { role } = req.query;
+    console.log(role)
     const sales = await service.getAllById({ id, role });
     res.status(200).json({ sales });
   },

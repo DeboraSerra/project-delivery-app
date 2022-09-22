@@ -9,7 +9,7 @@ const SaleModel = {
 		`;
 		const [{ insertId }] = await conn.execute(query, [user, seller, total, address, number, date, status]);
 		query = `
-			INSERT INTO saleProducts (sale_id, product_id, quantity)
+			INSERT INTO sales_products (sale_id, product_id, quantity)
 			VALUES (?, ?, ?);
 		`;
 		await Promise.all(products.map(({ id, qty }) => conn.execute(query, [insertId, id, qty])));
@@ -24,14 +24,24 @@ const SaleModel = {
 		const [[sale]] = await conn.execute(query, [status, id]);
 		return sale;
 	},
-	getAllById: async ({ id, role}) => {
+	getAllById: async ({ id, role }) => {
 		const baseId = role === 'seller' ? 'seller_id' : 'user_id';
-		const query = `
+		let query = `
 			SELECT * FROM sales
-			WHERE ? = ?;
+			WHERE ${baseId} = ?;
 		`;
-		const [sales] = await conn.execute(query, [baseId, id]);
-		return sales;
+		const [sales] = await conn.execute(query, [id]);
+		query = `
+			SELECT p.*, sp.quantity FROM products p
+			INNER JOIN sales_products sp
+			ON sp.product_id = p.id
+			WHERE sale_id = ?;
+		`;
+		const prod = await Promise.all(sales.map(async (sale) => {
+			const [products] = await conn.execute(query, [sale.id])
+			return { ...sale, products };
+		}))
+		return prod;
 	},
 	getOne: async (id) => {
 		const query = `SELECT * FROM sales WHERE id = ?;`;

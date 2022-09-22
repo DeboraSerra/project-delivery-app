@@ -7,10 +7,13 @@ const CodeError = require('../helpers/CodeError');
 const SaleService = {
   createSale: async (info) => {
     const value = await validateSale(info);
-    const userExists = await userModel.getUser(value.user);
-    if (!userExists) throw new CodeError('User not found', 404);
-    const sellerExists = await userExists.getUser(value.seller);
-    if (!sellerExists) throw new CodeError('Seller not found', 404);
+    const user = await userModel.getUserById(value.user);
+    if (!user) throw new CodeError('User not found', 404);
+    const seller = await userModel.getUserById(value.seller);
+    if (!seller) throw new CodeError('Seller not found', 404);
+    if (seller.role === 'customer') {
+      throw new CodeError('Seller informed has the wrong role', 400);
+    }
     await Promise.all(info.products.map(async ({ id }) => {
       const exists = await productModel.getOne(id);
       if (!exists) throw new CodeError('Product not found', 404);
@@ -28,6 +31,7 @@ const SaleService = {
   },
   getAllById: async (info) => {
     const value = await validateGetById(info);
+    console.log(value)
     const sales = await model.getAllById(value);
     return sales;
   },
@@ -42,7 +46,7 @@ const SaleService = {
   },
   delete: async (id) => {
     const exists = await model.getOne(id);
-    if (!sale) throw new CodeError('Sale not found', 404);
+    if (!exists) throw new CodeError('Sale not found', 404);
     await model.delete(id);
   },
 };
