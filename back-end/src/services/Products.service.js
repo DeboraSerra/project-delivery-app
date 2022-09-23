@@ -3,7 +3,12 @@ const CodeError = require('../helpers/CodeError');
 const { validateProduct } = require('../helpers/validations');
 
 const ProductsServices = {
-  getAll: async () => {
+  getAll: async (name) => {
+    console.log(name);
+    if (name) {
+      const products = await model.getByName(name);
+      return products;
+    }
     const products = await model.getAll();
     return products;
   },

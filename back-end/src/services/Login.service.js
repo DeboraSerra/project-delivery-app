@@ -17,7 +17,7 @@ const LoginService = {
     await validateEmail({ email });
     const user = await model.getUser(email);
     if (!user) {
-      throw CodeError('Invalid e-mail or password', 400);
+      throw new CodeError('Invalid e-mail or password', 400);
     }
     const match = await bcrypt.compare(password, user.password);
     if (!match) {

@@ -11,7 +11,12 @@ const LoginModel = {
   },
   getUser: async (email) => {
     const query = `SELECT * FROM users WHERE email = ?`;
-    const [[ user ]] = await conn.execute(query, [email]);
+    const [[user]] = await conn.execute(query, [email]);
+    return user;
+  },
+  getUserById: async (id) => {
+    const query = `SELECT * FROM users WHERE id = ?`;
+    const [[user]] = await conn.execute(query, [id]);
     return user;
   },
   forgotPassword: async (email) => {

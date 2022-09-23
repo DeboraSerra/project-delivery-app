@@ -33,12 +33,20 @@ const ProductsModel = {
   },
   delete: async (id) => {
     const query = `
-     DELETE FROM products
-     WHERE id = ?;
+      DELETE FROM products
+      WHERE id = ?;
     `;
     const [product] = await conn.execute(query, [id]);
     return product;
   },
+  getByName: async (name) => {
+    const query = `
+      SELECT * FROM products
+      WHERE name LIKE CONCAT('%', ?, '%');
+    `;
+    const [products] = await conn.execute(query, [name]);
+    return products;
+  }
 };
 
 module.exports = ProductsModel;

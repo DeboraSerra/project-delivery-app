@@ -2,7 +2,8 @@ const service = require('../services/Products.service');
 
 const ProductsController = {
   getAll: async (req, res) => {
-    const products = await service.getAll();
+    const { name } = req.query;
+    const products = await service.getAll(name);
     res.status(200).json({ products });
   },
   getOne: async (req, res) => {
