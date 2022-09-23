@@ -55,9 +55,9 @@ export function ProductCheckoutCard(props) {
 }
 
 ProductCheckoutCard.propTypes = {
-  productId: propTypes.string.isRequired,
+  productId: propTypes.number.isRequired,
   productName: propTypes.string.isRequired,
-  productPrice: propTypes.number.isRequired,
+  productPrice: propTypes.string.isRequired,
   productUrlImage: propTypes.string.isRequired,
   qty: propTypes.number.isRequired,
 };

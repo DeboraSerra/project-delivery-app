@@ -72,7 +72,7 @@ export function AddRemoveItemCart({
 }
 
 AddRemoveItemCart.propTypes = {
-  productId: propTypes.string.isRequired,
+  productId: propTypes.number.isRequired,
   productName: propTypes.string.isRequired,
   productPrice: propTypes.string.isRequired,
   productUrlImage: propTypes.string.isRequired,
