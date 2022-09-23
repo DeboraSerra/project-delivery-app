@@ -1,42 +1,13 @@
 import propTypes from 'prop-types';
 import {
-  Card, CardContent, CardMedia, Typography, Button, ButtonGroup, CardActionArea, CardActions, Input,
+  Card, CardContent, CardMedia, Typography, CardActionArea, CardActions,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import RemoveIcon from '@mui/icons-material/Remove';
-import AddIcon from '@mui/icons-material/Add';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCartItems, removeItemFromCart } from 'redux/slicers';
+import { AddRemoveItemCart } from 'components/Buttons';
 
-export function ProductCard({
-  productId, productName, productPrice, productUrlImage, cardHeight, cardWidth,
-}) {
-  const theme = useTheme();
-  const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state);
-  const findItem = cartItems.find((e) => e.productId === productId);
-  const [quantity, setQuantity] = useState(findItem?.qty || 0);
-
-  const handleAdd = () => {
-    setQuantity(quantity + 1);
-    dispatch(setCartItems({
-      productId, productName, productPrice, productUrlImage, qty: quantity + 1,
-    }));
-  };
-
-  const handleRemove = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-      dispatch(setCartItems({
-        productId, productName, productPrice, productUrlImage, qty: quantity - 1,
-      }));
-    }
-    if (quantity === 1) {
-      dispatch(removeItemFromCart(productId));
-    }
-  };
-
+export function ProductCard(props) {
+  const {
+    productName, productPrice, productUrlImage, cardHeight, cardWidth,
+  } = props;
   return (
     <Card sx={{ maxWidth: cardWidth, marginBottom: 5 }}>
       <CardActionArea>
@@ -57,29 +28,7 @@ export function ProductCard({
         </CardContent>
       </CardActionArea>
       <CardActions>
-
-        <ButtonGroup
-          variant="contained"
-          aria-label="outlined primary button group"
-          sx={{ justifyContent: 'center', width: '100%' }}
-        >
-          <Button
-            onClick={handleRemove}
-            disabled={quantity === 0}
-          >
-            <RemoveIcon />
-          </Button>
-          <Input
-            sx={{ width: 50, input: { textAlign: 'center' }, backgroundColor: theme.palette.background.cart }}
-            value={quantity}
-          />
-          <Button
-            onClick={handleAdd}
-          >
-            <AddIcon />
-          </Button>
-        </ButtonGroup>
-
+        <AddRemoveItemCart center {...props} />
       </CardActions>
     </Card>
   );

@@ -65,7 +65,7 @@ export const dark = {
     default: '#222B45',
     topbar: '#2D364F',
     cart: '#222B45',
-    level2: '#333',
+    level2: '#26314f',
     level1: '#2D3748',
   },
 };
