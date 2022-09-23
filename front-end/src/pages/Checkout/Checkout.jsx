@@ -10,6 +10,7 @@ import { useTheme } from '@mui/material/styles';
 export function Checkout() {
   const { cartItems } = useSelector((state) => state);
   const theme = useTheme();
+  // TODO - Ajust layout when cart is empty or with less than 3 items
   return (
     <>
       <Header />

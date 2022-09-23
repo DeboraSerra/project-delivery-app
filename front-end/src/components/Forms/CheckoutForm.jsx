@@ -1,8 +1,12 @@
 import {
   Typography, Box, TextField, Button, Divider,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 export function CheckoutForm() {
+  const { cartItems } = useSelector((state) => state);
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.qty * item.productPrice, 0);
+
   return (
     <Box
       textAlign="center"
@@ -40,7 +44,9 @@ export function CheckoutForm() {
         variant="h6"
         component="div"
       >
-        Your Total: R$ 100
+        Your Total: R$
+        {' '}
+        {totalPrice.toFixed(2)}
       </Typography>
       <Button
         variant="contained"
